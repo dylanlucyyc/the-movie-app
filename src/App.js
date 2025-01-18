@@ -1,13 +1,16 @@
-import Carousel from "./components/Carousel";
-import Header from "./components/Header";
 import ThemeProvider from "./contexts/ThemeProvider";
+import HomeLayout from "./layouts/HomeLayout";
+import DisplayPanel from "./components/DisplayPanel";
+import SideBar from "./components/SideBar";
 
 function App() {
   return (
     <div>
       <ThemeProvider>
-        <Header />
-        <Carousel />
+        <HomeLayout>
+          <SideBar />
+          <DisplayPanel />
+        </HomeLayout>
       </ThemeProvider>
     </div>
   );

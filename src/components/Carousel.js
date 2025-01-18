@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Box, IconButton, Slide, Stack, Button } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Slide,
+  Stack,
+  Button,
+  CardMedia,
+} from "@mui/material";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
@@ -9,10 +16,32 @@ const Card = ({ id }) => (
     sx={{
       width: "100%",
       height: "100%",
-      backgroundColor: "lightgray",
+      zIndex: "-1",
     }}
   >
-    Card {id}
+    {/* Card {id} */}
+    <CardMedia
+      component="img"
+      alt="green iguana"
+      height="auto"
+      image="https://static1.dienanh.net/upload//2018/06/11/phin-alice-in-wonderland-alice-o-xu-so-than-tien-672e7d.jpg"
+    />
+
+    <Box
+      sx={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.3)", // Semi-transparent overlay
+        color: "#fff", // White text for contrast
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 0, // Ensure it's above the image
+      }}
+    ></Box>
   </Box>
 );
 
@@ -23,7 +52,6 @@ function Carousel() {
   const [containerWidth, setContainerWidth] = useState(window.innerWidth);
 
   const cardsPerPage = 1;
-  //   const containerWidth = 100%; // Set the container width for the carousel
   const duplicateCards = Array.from({ length: 10 }, (_, i) => (
     <Card id={i} key={i} />
   ));
@@ -71,7 +99,6 @@ function Carousel() {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        height: "300px",
         width: "100%",
         margin: 0,
       }}
@@ -91,6 +118,9 @@ function Carousel() {
             left: "0",
             top: "50%",
             transform: "translateY(-50%)",
+            zIndex: 1,
+            backgroundColor: "white",
+            ml: 1,
           }}
           disabled={currentPage === 0}
         >
@@ -126,6 +156,9 @@ function Carousel() {
             right: "0",
             top: "50%",
             transform: "translateY(-50%)",
+            zIndex: 1,
+            backgroundColor: "white",
+            mr: 1,
           }}
           disabled={
             currentPage >= Math.ceil((cards.length || 0) / cardsPerPage) - 1
@@ -158,9 +191,10 @@ function Carousel() {
                 width: "8px",
                 height: "8px",
                 borderRadius: "50%",
-                backgroundColor: currentPage === index ? "blue" : "gray",
+                backgroundColor:
+                  currentPage === index ? "secondary.dark" : "secondary.light",
                 "&:hover": {
-                  backgroundColor: "darkblue",
+                  backgroundColor: "secondary.darker",
                 },
               }}
             />

@@ -5,21 +5,23 @@ import {
 } from "@mui/material/styles";
 
 const PRIMARY = {
-  lighter: "#FFD07F",
-  light: "#FDA65D",
-  main: "#FF8243",
-  dark: "#E26A2C",
-  darker: "#cc571f",
+  lighter: "#9CFFD5",
+  light: "#57E8A6",
+  main: "#04D377",
+  dark: "#03A35B",
+  darker: "#027847",
   contrastText: "#FFF",
 };
+
 const SECONDARY = {
-  lighter: "#D6E4FF",
-  light: "#84A9FF",
-  main: "#3366FF",
-  dark: "#1939B7",
-  darker: "#091A7A",
+  lighter: "#E2D6FF",
+  light: "#AC8EFF",
+  main: "#815BE8",
+  dark: "#593DB5",
+  darker: "#3A297E",
   contrastText: "#FFF",
 };
+
 const SUCCESS = {
   lighter: "#E9FCD4",
   light: "#AAF27F",
