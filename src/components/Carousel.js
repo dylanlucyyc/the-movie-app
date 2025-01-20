@@ -79,7 +79,7 @@ function Carousel() {
 
   useEffect(() => {
     setCards(duplicateCards);
-  }, []);
+  }, [duplicateCards]);
 
   useEffect(() => {
     // Function to update the container width

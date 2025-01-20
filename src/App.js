@@ -8,8 +8,8 @@ import apiService from "./app/apiService";
 function App() {
   const [movies, setMovies] = useState({});
   const [genres, setGenres] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); // eslint-disable-line no-unused-vars
+  const [error, setError] = useState(null); // eslint-disable-line no-unused-vars
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [selectedGenreId, setSelectedGenreId] = useState();
