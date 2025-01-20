@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { ListItem, List, ListItemText } from "@mui/material";
 
-export default function MovieCard() {
+export default function MovieCard({ movie, genres }) {
   const style = {
     py: 0,
     width: "100%",
@@ -19,34 +19,57 @@ export default function MovieCard() {
     <Card sx={{ maxWidth: 300, width: "100%", borderRadius: 0 }}>
       <CardMedia
         component="img"
-        alt="green iguana"
+        alt={movie.original_title}
         height="auto"
-        image="https://image.tmdb.org/t/p/w300_and_h450_bestv2/jbOSUAWMGzGL1L4EaUF8K6zYFo7.jpg"
+        image={`https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {movie.title}
         </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+        <Typography
+          variant="body2"
+          sx={{
+            color: "text.secondary",
+            display: "-webkit-box",
+            overflow: "hidden",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 3,
+            mb: 1,
+          }}
+        >
+          {movie.overview}
         </Typography>
         <List sx={style}>
           <Divider component="li" />
           <ListItem sx={{ padding: 0 }}>
-            <ListItemText secondary="Full width variant below" />
+            <ListItemText secondary={`Release: ${movie.release_date}`} />
           </ListItem>
           <Divider component="li" />
           <ListItem sx={{ padding: 0 }}>
-            <ListItemText secondary="Full width variant below" />
+            <ListItemText
+              secondary={`Rating (Vote Average): ${movie.vote_average} (${movie.vote_count} votes)`}
+            />
           </ListItem>
           <Divider component="li" />
           <ListItem sx={{ padding: 0 }}>
-            <ListItemText secondary="Full width variant below" />
+            <ListItemText secondary={`Popularity: ${movie.popularity}`} />
           </ListItem>
           <Divider component="li" />
           <ListItem sx={{ padding: 0 }}>
-            <ListItemText secondary="Full width variant below" />
+            {console.log(genres)}
+            <ListItemText
+              secondary={`Genres: ${
+                genres
+                  ? movie.genre_ids
+                      .map(
+                        (id) => genres.find((genre) => genre.id === id)?.name
+                      )
+                      .filter(Boolean)
+                      .join(", ")
+                  : ""
+              }`}
+            />
           </ListItem>
           <Divider component="li" />
         </List>

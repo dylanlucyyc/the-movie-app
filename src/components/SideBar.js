@@ -1,6 +1,6 @@
 import { Box, Typography, Chip, Stack } from "@mui/material";
 
-function SideBar() {
+function SideBar({ genres }) {
   const handleClick = () => {
     return null;
   };
@@ -32,13 +32,16 @@ function SideBar() {
         useFlexGap
         sx={{ flexWrap: "wrap", minWidth: "300px", width: "300px" }}
       >
-        <Chip label="Action" onClick={handleClick} color="primary" />
-        <Chip label="Action" onClick={handleClick} color="primary" />
-        <Chip label="Action" onClick={handleClick} color="primary" />
-        <Chip label="Action" onClick={handleClick} color="primary" />
-        <Chip label="Action" onClick={handleClick} color="primary" />
-        <Chip label="Action" onClick={handleClick} color="primary" />
-        <Chip label="Action" onClick={handleClick} color="primary" />
+        {genres
+          ? genres.map((genre, index) => (
+              <Chip
+                label={`${genre.name}`}
+                onClick={handleClick}
+                color="primary"
+                key={index}
+              />
+            ))
+          : ""}
       </Stack>
     </Box>
   );

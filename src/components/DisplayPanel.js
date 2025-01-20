@@ -2,7 +2,7 @@ import { Box, Grid } from "@mui/material";
 
 import MovieCard from "./MovieCard";
 import PaginationContainer from "./PaginationContainer";
-function DisplayPanel() {
+function DisplayPanel({ movies, genres }) {
   return (
     <Box
       sx={{
@@ -20,11 +20,13 @@ function DisplayPanel() {
           gap: "18px",
         }}
       >
-        {Array.from(Array(6)).map((_, index) => (
-          <Grid key={index} size={{ xs: 4, sm: 4, md: 3 }}>
-            <MovieCard />
-          </Grid>
-        ))}
+        {movies
+          ? movies.map((movie, index) => (
+              <Grid key={index} size={{ xs: 4, sm: 4, md: 3 }}>
+                <MovieCard movie={movie} genres={genres} />
+              </Grid>
+            ))
+          : ""}
       </Grid>
       <PaginationContainer count={10} />
     </Box>
