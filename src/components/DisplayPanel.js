@@ -2,7 +2,13 @@ import { Box, Grid } from "@mui/material";
 
 import MovieCard from "./MovieCard";
 import PaginationContainer from "./PaginationContainer";
-function DisplayPanel({ movies, genres }) {
+function DisplayPanel({
+  movies,
+  genres,
+  totalPages,
+  currentPage,
+  setCurrentPage,
+}) {
   return (
     <Box
       sx={{
@@ -28,7 +34,11 @@ function DisplayPanel({ movies, genres }) {
             ))
           : ""}
       </Grid>
-      <PaginationContainer count={10} />
+      <PaginationContainer
+        count={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </Box>
   );
 }

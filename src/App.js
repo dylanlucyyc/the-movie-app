@@ -10,12 +10,28 @@ function App() {
   const [genres, setGenres] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [selectedGenreId, setSelectedGenreId] = useState();
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const getMovies = async () => {
       setLoading(true); // Start loading
       try {
-        const res = await apiService.get(`3/discover/movie`);
+        let url = `3/discover/movie?language=en-US&page=${currentPage}&sort_by=popularity.desc`;
+
+        if (selectedGenreId) {
+          setQuery("");
+          url += `&with_genres=${selectedGenreId}`;
+        }
+
+        if (query) {
+          setSelectedGenreId();
+          url = `3/search/movie?query=${query}`;
+        }
+
+        const res = await apiService.get(url);
         setMovies(res.data);
         setError(null);
       } catch (error) {
@@ -26,7 +42,7 @@ function App() {
     };
 
     getMovies();
-  }, []);
+  }, [currentPage, selectedGenreId, query]);
 
   useEffect(() => {
     const getGenres = async () => {
@@ -44,15 +60,27 @@ function App() {
 
     getGenres();
   }, []);
-  console.log(movies.results);
-  console.log(genres);
+
+  useEffect(() => {
+    setTotalPages(movies.total_pages);
+  }, [movies.total_pages]);
 
   return (
     <div>
       <ThemeProvider>
-        <HomeLayout>
-          <SideBar genres={genres.genres} />
-          <DisplayPanel movies={movies.results} genres={genres.genres} />
+        <HomeLayout query={query} setQuery={setQuery}>
+          <SideBar
+            genres={genres.genres}
+            selectedGenreId={selectedGenreId}
+            setSelectedGenreId={setSelectedGenreId}
+          />
+          <DisplayPanel
+            movies={movies.results}
+            genres={genres.genres}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalPages={totalPages}
+          />
         </HomeLayout>
       </ThemeProvider>
     </div>

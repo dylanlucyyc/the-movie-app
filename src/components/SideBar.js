@@ -1,8 +1,8 @@
 import { Box, Typography, Chip, Stack } from "@mui/material";
 
-function SideBar({ genres }) {
-  const handleClick = () => {
-    return null;
+function SideBar({ genres, selectedGenreId, setSelectedGenreId }) {
+  const handleClick = (genre) => {
+    setSelectedGenreId(genre.id);
   };
   return (
     <Box
@@ -36,7 +36,7 @@ function SideBar({ genres }) {
           ? genres.map((genre, index) => (
               <Chip
                 label={`${genre.name}`}
-                onClick={handleClick}
+                onClick={() => handleClick(genre)}
                 color="primary"
                 key={index}
               />

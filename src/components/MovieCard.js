@@ -57,7 +57,6 @@ export default function MovieCard({ movie, genres }) {
           </ListItem>
           <Divider component="li" />
           <ListItem sx={{ padding: 0 }}>
-            {console.log(genres)}
             <ListItemText
               secondary={`Genres: ${
                 genres

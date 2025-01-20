@@ -49,7 +49,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Header() {
+export default function Header({ query, setQuery }) {
+  const handleSearchChange = (event) => {
+    setQuery(event.target.value);
+  };
+
+  // const handleSearchSubmit = () => {
+  //   console.log("Search Term:", qu);
+  //   // Add logic to handle search query (e.g., API call or filtering data)
+  // };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "black" }}>
@@ -74,6 +83,13 @@ export default function Header() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              value={query}
+              onChange={handleSearchChange}
+              // onKeyDown={(event) => {
+              //   if (event.key === "Enter") {
+              //     handleSearchSubmit();
+              //   }
+              // }}
             />
           </Search>
         </Toolbar>
